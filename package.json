@@ -1,0 +1,29 @@
+{
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.20.0",
+    "dotenv": "^16.0.3",
+    "ejs": "^3.1.8",
+    "express": "^4.18.1",
+    "express-flash": "^0.0.2",
+    "express-session": "^1.17.3",
+    "method-override": "^3.0.0",
+    "nedb": "^1.8.0",
+    "nodemon": "^2.0.20",
+    "passport": "^0.6.0",
+    "passport-local": "^1.0.0",
+    "twilio": "^3.82.1"
+  },
+  "name": "project_2",
+  "version": "1.0.0",
+  "description": "this is a random history getter",
+  "main": "index.js",
+  "scripts": {
+    "muyiwa": "nodemon index.js"
+  },
+  "keywords": [
+    "history"
+  ],
+  "author": "Femi-ige Muyiwa",
+  "license": "MIT"
+}

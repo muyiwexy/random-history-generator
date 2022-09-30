@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .card {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            max-width: 300px;
+            margin: auto;
+            text-align: center;
+            font-family: arial;
+        }
+
+        .avatar {
+            padding-top: 10px;
+            width: 200px;
+            height: 200px;
+        }
+
+        .title {
+            color: grey;
+            font-size: 18px;
+        }
+
+        a {
+            text-decoration: none;
+            font-size: 22px;
+            color: black;
+        }
+
+        a:hover {
+            opacity: 0.7;
+        }
+
+        #uni {
+            padding-bottom: 20px;
+        }
+        #modalbutton{
+            color: blanchedalmond;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2 style="text-align:center">User Profile</h2>
+
+    <div class="card">
+        <img src="https://www.kindpng.com/picc/m/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png"
+            alt="User Avatar Png - User Avatar Icon Png, Transparent Png@kindpng.com" class="avatar">
+        <h1>
+            <%=name%>
+        </h1>
+        <p class="title">
+            <%=email%>
+        </p>
+
+        <button id="modalbutton" onclick="showmodal()">unverified</button>
+
+        <p id="uni">
+            <%=number%>
+        </p>
+    </div>
+
+    <script>
+        var modalbutton = document.getElementById("modalbutton");
+        modalbutton.style.backgroundColor = "green"
+        modalbutton.textContent = "verified"
+        modalbutton.disabled = true
+    </script>
+
+</body>
+
+</html>

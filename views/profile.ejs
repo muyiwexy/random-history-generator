@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .card {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            max-width: 300px;
+            margin: auto;
+            text-align: center;
+            font-family: arial;
+        }
+
+        .avatar {
+            padding-top: 10px;
+            width: 200px;
+            height: 200px;
+        }
+
+        .title {
+            color: grey;
+            font-size: 18px;
+        }
+
+        a {
+            text-decoration: none;
+            font-size: 22px;
+            color: black;
+        }
+
+        a:hover {
+            opacity: 0.7;
+        }
+
+        #uni {
+            padding-bottom: 20px;
+        }
+
+        button {
+            color: blanchedalmond;
+            cursor: pointer;
+            background-color: red;
+        }
+
+        /* The Modal (background) */
+        .modal {
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            /* Stay in place */
+            z-index: 1;
+            /* Sit on top */
+            padding-top: 100px;
+            /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%;
+            /* Full width */
+            height: 100%;
+            /* Full height */
+            overflow: auto;
+            /* Enable scroll if needed */
+            background-color: rgb(0, 0, 0);
+            /* Fallback color */
+            background-color: rgba(0, 0, 0, 0.4);
+            /* Black w/ opacity */
+        }
+
+        /* Modal Content */
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        /* The Close Button */
+        .close {
+            color: #aaaaaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .modal-header {
+            border-bottom: 1px solid gray;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2 style="text-align:center">User Profile</h2>
+
+    <div class="card">
+        <img src="https://www.kindpng.com/picc/m/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png"
+            alt="User Avatar Png - User Avatar Icon Png, Transparent Png@kindpng.com" class="avatar">
+        <!-- <img src="/w3images/team2.jpg" alt="John" style="width:100%"> -->
+        <h1>
+            <%=name%>
+        </h1>
+        <p class="title">
+            <%=email%>
+        </p>
+
+        <button id="modalbutton" onclick="showmodal()">unverified</button>
+
+        <div id="Modal" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close" id="closemodal" onclick="hidemodal()">&times;</span>
+                <div class="modal-header">
+                    <p>Email verification</p>
+                </div>
+                <p>Enter code: <input name="code" id="code" type="text" required></p>
+                <div class="button">
+                    <input type="submit" value="Submit" onclick="submitcode()">
+                </div>
+            </div>
+
+        </div>
+        <p id="uni">
+            <%=number%>
+        </p>
+    </div>
+
+    <script>
+        var modalbutton = document.getElementById("modalbutton");
+        var modal = document.getElementById("Modal")
+        var close = document.getElementById("closemodal")
+
+        async function showmodal() {
+            modal.style.display = "block";
+            const val = Math.floor(1000 + Math.random() * 9000);
+            // console.log(val);
+            const dataobj = { val };
+            const options = {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(dataobj)
+            }
+            const responsedata = await fetch('/otp', options)
+            const json = await responsedata.json()
+            // console.log(json)
+        }
+        function hidemodal() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+        async function submitcode(){
+            var inputbox = document.getElementById("code").value;
+            const dataobj = { inputbox };
+            const options = {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(dataobj)
+            }
+            const responsedata = await fetch('/profile', options)
+            const json = await responsedata.json()
+            if (json != null){
+                modal.style.display = "none";
+                // modalbutton.style.backgroundColor = "green"
+                // modalbutton.textContent = "verified"
+                modalbutton.disabled = true
+            }
+            // console.log(json)
+        }
+
+    </script>
+
+</body>
+
+</html>

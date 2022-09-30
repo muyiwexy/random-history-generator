@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Text Generator</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .button {
+            display: flex;
+            justify-content: center;
+            padding-top: 20px;
+        }
+
+        .header {
+            padding: 10px;
+            background: #1a9cbc;
+            text-align: center;
+            color: rgba(0, 0, 0, 0.726);
+            font-size: 20px;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+
+        .body {
+            padding: 20px;
+            align-items: center;
+            display: flex;
+            justify-content: center;
+        }
+
+        #output {
+            background-color: bisque;
+            border: 2px solid black;
+            width: 700px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 70px 0;
+        }
+
+        /* form {
+            display: block;
+        } */
+    </style>
+</head>
+
+<body>
+    <div>
+        <header class="header">
+            <p> Random History Generator </p>
+        </header>
+        <div class="body">
+            <div>
+                <% if (messages.error) {%>
+                <%= messages.error%>
+            <%}%>
+                <form method="POST" action="/login" id="forms">
+                    <p>Enter Email: <input name="email" id="email" type="email" required></p>
+                    <p>Enter Password: <input name="password" id="password" type="password" required></p>
+                    <div class="button">
+                        <input type="submit" value="Submit">
+                    </div>
+                </form>
+                <a href="/register">Register</a>
+            </div>
+        </div>
+        <!-- <div id="output">
+            <p>Do you want to learn a new history? Submit a request</p>
+        </div> -->
+    </div>
+    <script>
+        // async function submitted() {
+        //     const number = document.getElementById("forms");
+        //     console.log(number)
+            // const data = {number}
+            // const jsonturn = JSON.stringify(data)
+            // console.log(jsonturn)
+            // const options = {
+            //     method: "POST",
+            //     headers: {
+            //         'Content-Type': 'application/json'
+            //     },
+            //     body: JSON.stringify(data)
+            // }
+            // const responsedata = await fetch('/send', options)
+            // const json = await responsedata.json();
+            // console.log(json)
+            // output.innerHTML = number;
+            // var option = document.getElementById("dropdown").value;
+            // var output = document.getElementById("output");
+            // let quote = [
+            //     '"hello"',
+            //     '"hi"',
+            //     '"i am fine"'
+            // ]
+            // if (number == 1 && option == 'Nigeria') {
+            //     var random = quote[Math.floor(Math.random() * quote.length)]
+            //     output.innerHTML = random;
+            // }else{
+            //     alert("number is missing")
+            // }
+        // }
+    </script>
+</body>
+
+</html>

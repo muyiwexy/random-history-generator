@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Text Generator</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            overflow: hidden;
+            background: #1a9cbc;
+            padding: 20px 10px;
+        }
+
+        .headertext {
+            float: left;
+            width: fit-content;
+            text-align: center;
+            color: rgba(0, 0, 0, 0.726);
+            font-size: 20px;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+
+        .avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+
+        .headeranchor {
+            padding-right: 20px;
+            float: right;
+        }
+
+        .button1 {
+            display: flex;
+            justify-content: center;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+        .button2 {
+            display: flex;
+            justify-content: center;
+            padding-top: 20px;
+        }
+
+        .body {
+            align-items: center;
+            display: flex;
+            justify-content: center;
+        }
+
+        #displaybody {
+            display: none;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        #output {
+            background-color: bisque;
+            border: 2px solid black;
+            width: 700px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 70px 0;
+        }
+
+        .tooltip1 {
+            position: relative !important;
+            display: inline-block !important;
+            /* width: 175px !important; */
+            font-size: 14px;
+        }
+
+        .tooltip1 .tooltiptext {
+            visibility: hidden;
+            width: 120px !important;
+            background-color: black !important;
+            color: #fff !important;
+            text-align: center !important;
+            border-radius: 6px !important;
+            padding: 5px 0 !important;
+            position: absolute !important;
+            z-index: 1 !important;
+            top: -5px !important;
+            left: 110% !important;
+        }
+
+        .tooltip1 .tooltiptext::after {
+            content: "";
+            position: absolute !important;
+            top: 50% !important;
+            right: 100% !important;
+            margin-top: -5px !important;
+            border-width: 5px !important;
+            border-style: solid !important;
+            border-color: transparent black transparent transparent !important;
+        }
+
+        .tooltip1:hover .tooltiptext {
+            visibility: visible !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <div class="header">
+            <header>
+                <div class="headertext">
+                    <p class="headertext"> Random History Generator </p>
+                </div>
+                <div class="headeranchor">
+                    <a href="/profile"> <img
+                            src="https://www.kindpng.com/picc/m/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png"
+                            alt="User Avatar Png - User Avatar Icon Png, Transparent Png@kindpng.com"
+                            class="avatar"></a>
+                </div>
+
+            </header>
+        </div>
+        <div>
+            <h1>Hi, <%=name%>
+            </h1>
+            <div id="displaybody">
+                <div class="body">
+                    <div>
+                        <input name="Number" id="number" type="text" value="<%=displaynumber%> " required readonly>
+                    </div>
+                </div>
+                <div class="button1">
+                    <button id="send" class="tooltip1" type="button" onclick="submitted()" disabled>send
+                        <span class="tooltip1 tooltiptext">
+                            Verify your number
+                        </span>
+                    </button>
+                </div>
+            </div>
+            <div id="output">
+                <button type="button" onclick="show()">show</button>
+                <p id="content">Let us learn some Nigerian history</p>
+            </div>
+            <form action="/logout?_method=DELETE" method="POST">
+                <div class="button2">
+                    <button type="submit">Log Out</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        var number;
+        var view;
+        var target;
+        var send;
+        const output = document.getElementById('content')
+        var previousRandomNumber = 0;
+        var firsttime = true;
+        async function show() {
+            let quote = [
+                'Ogotun community in the Ekiti South West \nLocal Government Area of Ekiti State is renowned for weaving mats. \nThey take the craft as their life and are proud to relay their experiences of the past \nand present, when Sam Nwaoko visited the community.',
+                '*HAUSA*\nThe Hausa people are the largest tribe in Nigeria, making up approximately 25% of the population. Hausaland is concentrated in northern Nigeria, situated between the River Niger and Lake Chad.\nThe Hausa practise a very homogenised culture, keeping their traditions and way of life during and after colonisation. Islam is the main religion of Hausas and is said to have been brought by traders from Mali and Guinea during their trade exchanges, \nwhich they quickly adapted. Aside from English, they primarily speak the Hausa language.',
+                '*YORUBA*\nThe Yoruba people make up the second largest tribe, constituting an estimated 21% of the population. \nThe Yoruba states are located in southwest and north central regions of Nigeria. However, Yoruba speakers can also be found in parts of nearby countries, such as Benin Republic and Togo. \nThe Yoruba people practise Christianity and Islam, while a minority still follow ancestral traditional beliefs. They are people of many cultural traditions, and Ile Ife which in Yoruba mythology is where life began is held as the spiritual centre of the Yoruba tribe.',
+                '*IGBO*\nThe Igbo people are descendants of the Nri Kingdom, the oldest in Nigeria. \nThey have many customs and traditions and can be found in southeast Nigeria, \nconsisting of about 18% of the population. \nThis tribe differs from the others in that there is no hierarchical system of governance. \nInstead, a traditional republican system exists with a consultative assembly of people, which guarantees equality to citizens. \nThe Igbo people also had their traditional beliefs, but after colonisation, the majority (more than 90%) converted to practise Christianity, \nwith a large number becoming Catholic.The Igbo people also play an important part in the Nigerian oil trade since most of this natural resource is found within Igbo land.'
+            ]
+            do {
+                random = quote[Math.floor(Math.random() * quote.length)]
+            } while (random == previousRandomNumber);
+            previousRandomNumber = random;
+            if (firsttime) {
+                output.innerHTML = random + '<div class="button1"><button id="view" type="button" onclick="displaysubmitted()">send</button></div>';
+                // firsttime = false
+            } else {
+                output.innerHTML = random
+            }
+        }
+        async function displaysubmitted() {
+            view = document.getElementById("view");
+            target = document.getElementById("displaybody")
+            if (target.style.display = "none") {
+                target.style.display = "block";
+                firsttime = false;
+                output.innerHTML = random
+
+            }
+
+        }
+        async function submitted() {
+            target = document.getElementById('displaybody')
+            view = document.getElementById('view')
+            number = document.getElementById('number').value
+            var outputdata = output.innerHTML
+
+            firsttime = true
+            const dataobj = { number, outputdata };
+            const options = {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(dataobj)
+            }
+            if (target.style.display != "none") {
+                target.style.display = "none";
+                output.innerHTML = random + '<div class="button1"><button id="view" type="button" onclick="displaysubmitted()">send</button></div>';
+                firsttime = true
+            }
+            const responsedata = await fetch('/', options)
+            const json = await responsedata.json()
+            // console.log(json)
+        }
+    </script>
+</body>
+
+</html>
