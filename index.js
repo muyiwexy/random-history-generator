@@ -62,10 +62,6 @@ app.get('/profile', checkAuthenticated, async (req, res) => {
                 res.render('profile.ejs', { name: req.user.firstname + ' ' + req.user.lastname, email: req.user.email, number: req.user.number })
             }
         })
-        // signupDatabase.find({code:req.user.code}, function (err, codedata){
-        //     const output = codedata
-
-        // })
     } catch (error) {
         console.log(error)
     }
