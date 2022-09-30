@@ -33,12 +33,12 @@ app.use(methodoverride('_method'))
 
 
 app.get('/', checkAuthenticated, (req, res) => {
-    signupDatabase.find({email:req.user.email}, function (err, constanst){
+    signupDatabase.find({ email: req.user.email }, function (err, constanst) {
         // console.log(constanst[0].code)
         // console.log(output.length)
-        if (constanst[0].code == null){
+        if (constanst[0].code == null) {
             res.render('index.ejs', { name: req.user.firstname + ' ' + req.user.lastname, displaynumber: "whatsapp:" + req.user.number })
-        }else{
+        } else {
             res.render('verifiedindex.ejs', { name: req.user.firstname + ' ' + req.user.lastname, displaynumber: "whatsapp:" + req.user.number })
         }
     })
@@ -53,12 +53,12 @@ app.post('/', async (req, res) => {
 
 app.get('/profile', checkAuthenticated, async (req, res) => {
     try {
-        signupDatabase.find({email:req.user.email}, function (err, constanst){
+        signupDatabase.find({ email: req.user.email }, function (err, constanst) {
             // console.log(constanst[0].code)
             // console.log(output.length)
-            if (constanst[0].code != null){
+            if (constanst[0].code != null) {
                 res.render('verifiedprofile.ejs', { name: req.user.firstname + ' ' + req.user.lastname, email: req.user.email, number: req.user.number })
-            }else{
+            } else {
                 res.render('profile.ejs', { name: req.user.firstname + ' ' + req.user.lastname, email: req.user.email, number: req.user.number })
             }
         })
@@ -70,7 +70,7 @@ app.get('/profile', checkAuthenticated, async (req, res) => {
 
 app.post('/profile', checkAuthenticated, async (req, res) => {
     res.json(req.body)
-    signupDatabase.update({ number: req.user.number }, { $set: { code: req.body.inputbox } }, {upsert: true}, function () {
+    signupDatabase.update({ number: req.user.number }, { $set: { code: req.body.inputbox } }, { upsert: true }, function () {
         signupDatabase.persistence.compactDatafile()
     });
 })

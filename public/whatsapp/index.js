@@ -5,7 +5,7 @@ const client = require('twilio')(accountSid, authToken, {
     lazyloading: true
 });
 
-async function sendmessage (message, senderID) {
+async function sendmessage(message, senderID) {
     try {
         await client.messages
             .create({
@@ -19,6 +19,6 @@ async function sendmessage (message, senderID) {
         console.log(error);
     }
 };
-module.exports ={
+module.exports = {
     sendmessage
 }
